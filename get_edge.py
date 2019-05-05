@@ -20,6 +20,7 @@ class GetEdge(bpy.types.Operator):
             ('NOT_SHARP', "Not Sharp", "Select edges based on Not Sharp"),
             ('NOT_BEVEL', "Not Bevel", "Select edges based on Not Bevel"),
             ('NOT_CREASE', "Not Crease", "Select edges based on Not Crease"),
+            ('NOT_ANY', "Not Any", "Select edges based on Not Any"),
         ),
     )
 
@@ -52,6 +53,15 @@ class GetEdge(bpy.types.Operator):
             e.select = True
 
         if self.kind == 'NOT_CREASE' and not e[crease_layer]:
+            e.select = True
+
+        if (
+            self.kind == 'NOT_ANY'
+            and not e.seam
+            and e.smooth
+            and not e[bevel_layer]
+            and not e[crease_layer]
+        ):
             e.select = True
 
     def execute(self, context):
