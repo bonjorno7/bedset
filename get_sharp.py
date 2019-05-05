@@ -1,10 +1,11 @@
-import os, subprocess, math
-import bpy, bmesh, mathutils
+import bpy
+import bmesh
+import math
 
 
-class HARD_OT_GetSharp(bpy.types.Operator):
+class GetSharp(bpy.types.Operator):
     """Select edges based on angle, can Mark Sharp / Bevel Weight / Crease"""
-    bl_idname = "hard.get_sharp"
+    bl_idname = "bedset.get_sharp"
     bl_label = "Get Sharp"
     bl_options = {'REGISTER', 'UNDO'}
 
