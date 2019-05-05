@@ -1,5 +1,7 @@
 import bpy
 from . get_sharp import GetSharp
+from . get_edge import GetEdge
+from . set_edge import SetEdge
 
 
 bl_info = {
@@ -7,7 +9,7 @@ bl_info = {
     "name": "BedSet",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 0, 2),
+    "version": (0, 0, 3),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -16,6 +18,8 @@ bl_info = {
 
 classes = (
     GetSharp,
+    GetEdge,
+    SetEdge,
 )
 
 
