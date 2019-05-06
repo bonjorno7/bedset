@@ -3,6 +3,8 @@ from . get_sharp import GetSharp
 from . get_edge import GetEdge
 from . set_edge import SetEdge
 from . edge_menu import EdgeMenu
+from . boolean import Boolean
+from . boolean_menu import BooleanMenu
 
 
 bl_info = {
@@ -22,10 +24,12 @@ classes = (
     GetEdge,
     SetEdge,
     EdgeMenu,
+    Boolean,
+    BooleanMenu,
 )
 
 
-addon_keymaps = [] # bpy.ops.mesh.intersect()
+addon_keymaps = []
 
 
 def register():
@@ -37,6 +41,10 @@ def register():
 
     kmi_mnu = km.keymap_items.new("wm.call_menu", "Q", "PRESS", ctrl=True)
     kmi_mnu.properties.name = EdgeMenu.bl_idname
+    addon_keymaps.append((km, kmi_mnu))
+
+    kmi_mnu = km.keymap_items.new("wm.call_menu", "Q", "PRESS", ctrl=True)
+    kmi_mnu.properties.name = BooleanMenu.bl_idname
     addon_keymaps.append((km, kmi_mnu))
 
 

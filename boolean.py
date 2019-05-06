@@ -25,6 +25,36 @@ class Boolean(bpy.types.Operator):
         edit = context.active_object.mode == "EDIT"
         return active and edit
 
+    def selected(self, bm):
+        verts = [v for v in bm.verts if v.select]
+        edges = [e for e in bm.edges if e.select]
+        faces = [f for f in bm.faces if f.select]
+        return verts + edges + faces
+
     def execute(self, context):
+        if self.kind == 'DIFFERENCE':
+            bpy.ops.mesh.intersect_boolean(operation='DIFFERENCE')
+
+        if self.kind == 'UNION':
+            bpy.ops.mesh.intersect_boolean(operation='UNION')
+
+        if self.kind == 'INTERSECT':
+            bpy.ops.mesh.intersect_boolean(operation='INTERSECT')
+
         if self.kind == 'CUT':
+            mesh = context.active_object.data
+            bm = bmesh.from_edit_mesh(mesh)
+            geom = self.selected(bm)
+
             bpy.ops.mesh.intersect()
+
+            for g in geom:
+                g.select = True
+            bmesh.update_edit_mesh(mesh)
+            bpy.ops.mesh.select_linked()
+
+            geom = self.selected(bm)
+            bmesh.ops.delete(bm, geom=geom, context='VERTS')
+            bmesh.update_edit_mesh(mesh)
+
+        return {'FINISHED'}
