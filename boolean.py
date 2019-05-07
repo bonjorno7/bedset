@@ -31,6 +31,12 @@ class Boolean(bpy.types.Operator):
         faces = [f for f in bm.faces if f.select]
         return verts + edges + faces
 
+    def unselected(self, bm):
+        verts = [v for v in bm.verts if not v.select]
+        edges = [e for e in bm.edges if not e.select]
+        faces = [f for f in bm.faces if not f.select]
+        return verts + edges + faces
+
     def execute(self, context):
         if self.kind == 'DIFFERENCE':
             bpy.ops.mesh.intersect_boolean(operation='DIFFERENCE')
@@ -44,17 +50,27 @@ class Boolean(bpy.types.Operator):
         if self.kind == 'CUT':
             mesh = context.active_object.data
             bm = bmesh.from_edit_mesh(mesh)
-            geom = self.selected(bm)
+            cutter = self.selected(bm)
+            target = self.unselected(bm)
 
             bpy.ops.mesh.intersect()
+            selected = self.selected(bm)
+            for g in selected:
+                g.select = False
 
-            for g in geom:
+            for g in cutter:
                 g.select = True
             bmesh.update_edit_mesh(mesh)
             bpy.ops.mesh.select_linked()
 
-            geom = self.selected(bm)
-            bmesh.ops.delete(bm, geom=geom, context='VERTS')
+            delete = self.selected(bm)
+            bmesh.ops.delete(bm, geom=delete, context='VERTS')
+            bmesh.update_edit_mesh(mesh)
+
+            unselected = self.unselected(bm)
+            for g in selected:
+                if g in unselected:
+                    g.select = True
             bmesh.update_edit_mesh(mesh)
 
         return {'FINISHED'}

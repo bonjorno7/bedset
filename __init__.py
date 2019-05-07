@@ -40,11 +40,11 @@ def register():
     km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
 
     kmi_mnu = km.keymap_items.new("wm.call_menu", "Q", "PRESS", ctrl=True)
-    kmi_mnu.properties.name = EdgeMenu.bl_idname
+    kmi_mnu.properties.name = BooleanMenu.bl_idname
     addon_keymaps.append((km, kmi_mnu))
 
-    kmi_mnu = km.keymap_items.new("wm.call_menu", "Q", "PRESS", ctrl=True)
-    kmi_mnu.properties.name = BooleanMenu.bl_idname
+    kmi_mnu = km.keymap_items.new("wm.call_menu", "E", "PRESS", shift=True)
+    kmi_mnu.properties.name = EdgeMenu.bl_idname
     addon_keymaps.append((km, kmi_mnu))
 
 

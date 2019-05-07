@@ -13,4 +13,7 @@ class BooleanMenu(bpy.types.Menu):
         return active and edit
 
     def draw(self, context):
-        self.layout.operator(Boolean.bl_idname)
+        self.layout.operator(Boolean.bl_idname, text="Difference").kind = 'DIFFERENCE'
+        self.layout.operator(Boolean.bl_idname, text="Union").kind = 'UNION'
+        self.layout.operator(Boolean.bl_idname, text="Intersect").kind = 'INTERSECT'
+        self.layout.operator(Boolean.bl_idname, text="Cut").kind = 'CUT'
