@@ -3,10 +3,10 @@ import bmesh
 import math
 
 
-class GetSharp(bpy.types.Operator):
+class GetAngle(bpy.types.Operator):
     """Select edges based on angle"""
-    bl_idname = "bedset.get_sharp"
-    bl_label = "Get Sharp"
+    bl_idname = "bedset.get_angle"
+    bl_label = "Get Angle"
     bl_options = {'REGISTER', 'UNDO'}
 
     angle: bpy.props.FloatProperty(

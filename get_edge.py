@@ -30,70 +30,62 @@ class GetEdge(bpy.types.Operator):
         edit = context.active_object.mode == "EDIT"
         return active and edit
 
-    def select(self, e, bevel_layer, crease_layer):
-        if self.kind == 'SEAM' and e.seam:
-            e.select = True
+    def execute(self, context):
+        bpy.ops.mesh.select_mode(type='EDGE')
+        mesh = context.active_object.data
+        bm = bmesh.from_edit_mesh(mesh)
 
-        if self.kind == 'SHARP' and not e.smooth:
-            e.select = True
+        selected = [e for e in bm.edges if e.select]
+        selected = selected if selected else bm.edges
 
-        if self.kind == 'BEVEL' and e[bevel_layer]:
-            e.select = True
+        bevel = bm.edges.layers.bevel_weight.verify()
+        crease = bm.edges.layers.crease.verify()
 
-        if self.kind == 'CREASE' and e[crease_layer]:
-            e.select = True
+        for e in selected:
+            for f in e.link_faces:
+                f.select = False
 
-        if self.kind == 'NOT_SEAM' and not e.seam:
-            e.select = True
+        for e in selected:
+            if self.kind == 'SEAM':
+                e.select = e.seam
 
-        if self.kind == 'NOT_SHARP' and e.smooth:
-            e.select = True
+            elif self.kind == 'SHARP':
+                e.select = not e.smooth
 
-        if self.kind == 'NOT_BEVEL' and not e[bevel_layer]:
-            e.select = True
+            elif self.kind == 'BEVEL':
+                e.select = e[bevel]
 
-        if self.kind == 'NOT_CREASE' and not e[crease_layer]:
-            e.select = True
+            elif self.kind == 'CREASE':
+                e.select = e[crease]
 
-        if (
-            self.kind == 'NOT_ANY'
-            and not e.seam
-            and e.smooth
-            and not e[bevel_layer]
-            and not e[crease_layer]
-        ):
-            e.select = True
+            elif self.kind == 'NOT_SEAM':
+                e.select = not e.seam
+
+            elif self.kind == 'NOT_SHARP':
+                e.select = e.smooth
+
+            elif self.kind == 'NOT_BEVEL':
+                e.select = not e[bevel]
+
+            elif self.kind == 'NOT_CREASE':
+                e.select = not e[crease]
+
+            elif self.kind == 'NOT_ANY':
+                e.select = not e.seam and e.smooth and not e[bevel] and not e[crease]
+
+        bmesh.update_edit_mesh(mesh)
+        return {'FINISHED'}
 
     def execute(self, context):
         bpy.ops.mesh.select_mode(type='EDGE')
         mesh = context.active_object.data
         bm = bmesh.from_edit_mesh(mesh)
+
+        bevel = bm.edges.layers.bevel_weight.verify()
+        crease = bm.edges.layers.crease.verify()
+
         selected = [e for e in bm.edges if e.select]
-
-        if bm.edges.layers.bevel_weight:
-            bevel_layer = bm.edges.layers.bevel_weight.active
-        else:
-            bevel_layer = None
-
-        if bm.edges.layers.crease:
-            crease_layer = bm.edges.layers.crease.active
-        else:
-            crease_layer = None
-
-        if selected:
-            for e in selected:
-                for f in e.link_faces:
-                    f.select = False
-
-            for e in selected:
-                self.select(e, bevel_layer, crease_layer)
-
-        else:
-            for e in bm.edges:
-                self.select(e, bevel_layer, crease_layer)
-
-        bmesh.update_edit_mesh(mesh)
-        return {'FINISHED'}
+        selected = selected if selected else bm.edges
 
     def draw(self, context):
         self.layout.prop(self, "kind")

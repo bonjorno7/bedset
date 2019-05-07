@@ -2,9 +2,9 @@ import bpy
 import bmesh
 
 
-class Boolean(bpy.types.Operator):
+class EditBoolean(bpy.types.Operator):
     """Perform boolean operation with selected on unselected"""
-    bl_idname = "bedset.boolean"
+    bl_idname = "bedset.edit_boolean"
     bl_label = "Boolean"
     bl_options = {'REGISTER', 'UNDO'}
 

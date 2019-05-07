@@ -30,51 +30,55 @@ class SetEdge(bpy.types.Operator):
         edit = context.active_object.mode == "EDIT"
         return active and edit
 
-    def mark(self, e, bevel_layer, crease_layer):
-        if self.kind == 'MARK_SEAM':
-            e.seam = True
-
-        if self.kind == 'MARK_SHARP':
-            e.smooth = False
-
-        if self.kind == "MARK_BEVEL":
-            e[bevel_layer] = 1
-
-        if self.kind == "MARK_CREASE":
-            e[crease_layer] = 1
-
-        if self.kind == 'CLEAR_SEAM':
-            e.seam = False
-
-        if self.kind == 'CLEAR_SHARP':
-            e.smooth = True
-
-        if self.kind == "CLEAR_BEVEL":
-            e[bevel_layer] = 0
-
-        if self.kind == "CLEAR_CREASE":
-            e[crease_layer] = 0
-
-        if self.kind == "CLEAR_ALL":
-            e.seam = False
-            e.smooth = True
-            e[bevel_layer] = 0
-            e[crease_layer] = 0
-
     def execute(self, context):
+        bpy.ops.mesh.select_mode(type='EDGE')
         mesh = context.active_object.data
         bm = bmesh.from_edit_mesh(mesh)
+
+        bevel = bm.edges.layers.bevel_weight.verify()
+        crease = bm.edges.layers.crease.verify()
+
         selected = [e for e in bm.edges if e.select]
+        selected = selected if selected else bm.edges
 
-        bevel_layer = bm.edges.layers.bevel_weight.verify()
-        crease_layer = bm.edges.layers.crease.verify()
-
-        if selected:
+        if self.kind == 'MARK_SEAM':
             for e in selected:
-                self.mark(e, bevel_layer, crease_layer)
-        else:
-            for e in bm.edges:
-                self.mark(e, bevel_layer, crease_layer)
+                e.seam = True
+
+        if self.kind == 'MARK_SHARP':
+            for e in selected:
+                e.smooth = False
+
+        if self.kind == "MARK_BEVEL":
+            for e in selected:
+                e[bevel] = 1
+
+        if self.kind == "MARK_CREASE":
+            for e in selected:
+                e[crease] = 1
+
+        if self.kind == 'CLEAR_SEAM':
+            for e in selected:
+                e.seam = False
+
+        if self.kind == 'CLEAR_SHARP':
+            for e in selected:
+                e.smooth = True
+
+        if self.kind == "CLEAR_BEVEL":
+            for e in selected:
+                e[bevel] = 0
+
+        if self.kind == "CLEAR_CREASE":
+            for e in selected:
+                e[crease] = 0
+
+        if self.kind == "CLEAR_ALL":
+            for e in selected:
+                e.seam = False
+                e.smooth = True
+                e[bevel] = 0
+                e[crease] = 0
 
         bmesh.update_edit_mesh(mesh)
         return {'FINISHED'}
