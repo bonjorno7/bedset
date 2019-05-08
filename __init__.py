@@ -11,6 +11,7 @@ from . edit_boolean import EditBoolean
 from . edit_boolean_menu import EditBooleanMenu
 
 from . autosmooth import AutoSmooth
+from . bevel_object import BevelObject
 from . extra_menu import ExtraMenu
 
 from . bedset_menu import BedsetMenu
@@ -21,7 +22,7 @@ bl_info = {
     "name": "BedSet",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 0, 6),
+    "version": (0, 0, 7),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -32,7 +33,7 @@ classes = (
     GetAngle, GetEdge, GetEdgeMenu,
     SetEdge, SetEdgeMenu,
     EditBoolean, EditBooleanMenu,
-    AutoSmooth, ExtraMenu,
+    AutoSmooth, BevelObject, ExtraMenu,
     BedsetMenu,
 )
 

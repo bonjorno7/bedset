@@ -1,5 +1,6 @@
 import bpy
 from . autosmooth import AutoSmooth
+from . bevel_object import BevelObject
 
 
 class ExtraMenu(bpy.types.Menu):
@@ -7,7 +8,5 @@ class ExtraMenu(bpy.types.Menu):
     bl_label = "Extra"
 
     def draw(self, context):
-        self.layout.operator(
-            AutoSmooth.bl_idname,
-            text="Auto Smooth",
-        )
+        self.layout.operator(AutoSmooth.bl_idname)
+        self.layout.operator(BevelObject.bl_idname)
