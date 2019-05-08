@@ -4,8 +4,8 @@ import math
 
 
 class AutoSmooth(bpy.types.Operator):
-    """Turn on autosmooth for this mesh"""
-    bl_idname = "bedset.autosmooth"
+    """Turn on Auto Smooth for this mesh"""
+    bl_idname = "bedset.auto_smooth"
     bl_label = "Auto Smooth"
     bl_options = {'REGISTER', 'UNDO'}
 
@@ -34,30 +34,36 @@ class AutoSmooth(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return context.active_object is not None
+        return len(context.selected_objects) > 0
 
     def execute(self, context):
-        mesh = context.active_object.data
-        mesh.use_auto_smooth = self.smooth
-        mesh.auto_smooth_angle = self.angle
+        active = context.active_object
 
-        if mesh.is_editmode:
-            bm = bmesh.from_edit_mesh(mesh)
-        else:
-            bm = bmesh.new()
-            bm.from_mesh(mesh)
+        for o in context.selected_objects:
+            mesh = o.data
+            mesh.use_auto_smooth = self.smooth
+            mesh.auto_smooth_angle = self.angle
 
-        for f in bm.faces:
-            f.smooth = self.smooth
+            if mesh.is_editmode:
+                bm = bmesh.from_edit_mesh(mesh)
+            else:
+                bm = bmesh.new()
+                bm.from_mesh(mesh)
 
-        if mesh.is_editmode:
-            bmesh.update_edit_mesh(mesh)
-        else:
-            bm.to_mesh(mesh)
-            mesh.update()
+            for f in bm.faces:
+                f.smooth = self.smooth
 
-        if self.clear and mesh.has_custom_normals:
-            bpy.ops.mesh.customdata_custom_splitnormals_clear()
+            if mesh.is_editmode:
+                bmesh.update_edit_mesh(mesh)
+            else:
+                bm.to_mesh(mesh)
+                mesh.update()
+
+            if self.clear and mesh.has_custom_normals:
+                bpy.context.view_layer.objects.active = o
+                bpy.ops.mesh.customdata_custom_splitnormals_clear()
+
+        bpy.context.view_layer.objects.active = active
         return {'FINISHED'}
 
     def draw(self, context):

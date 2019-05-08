@@ -21,9 +21,8 @@ class EditBoolean(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        active = context.active_object is not None
-        edit = context.active_object.mode == "EDIT"
-        return active and edit
+        active = context.active_object
+        return active is not None and active.mode == 'EDIT'
 
     def selected(self, bm):
         verts = [v for v in bm.verts if v.select]

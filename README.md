@@ -1,14 +1,25 @@
-# BedSet
+## Bedset
 
-#### Some tools to make Blender more comfortable
+### Some tools to make Blender more comfortable
 
+#### GetAngle
+select edges based on angle
 
-GetAngle: select edges based on angle
+#### GetEdge
+select edges based on seam / sharp / bevel / crease
 
-GetEdge: select edges based on seam/sharp/bevel/crease
+#### SetEdge
+mark / clear edges as seam / sharp / bevel / crease
 
-SetEdge: mark/clear edges as seam/sharp/bevel/crease
+#### EditBoolean
+difference, union, intersect, cut
 
-EditBoolean: difference, union, intersect, cut
+#### ObjectBoolean
+difference, union, intersect, apply
+makes cutters display as wireframe
 
-ObjectBevel: add weighted bevel modifier to object
+#### AutoSmooth
+smooth faces and enable auto smooth on selected objects
+
+#### BevelObject
+add weighted bevel modifier to selected objects

@@ -34,16 +34,24 @@ class BevelObject(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return context.active_object is not None
+        return len(context.selected_objects) > 0
 
     def execute(self, context):
-        active = context.active_object
-        bevel = active.modifiers.new(name="Bevel", type='BEVEL')
+        for o in context.selected_objects:
+            bevel = None
 
-        bevel.width = self.width
-        bevel.segments = self.segments
+            for m in o.modifiers:
+                if m.name.startswith("Bedset Bevel"):
+                    bevel = m
+                    break
 
-        bevel.limit_method = 'WEIGHT'
+            if not bevel:
+                bevel = o.modifiers.new(name="Bedset Bevel", type='BEVEL')
+
+            bevel.width = self.width
+            bevel.segments = self.segments
+            bevel.limit_method = 'WEIGHT'
+
         return {'FINISHED'}
 
     def draw(self, context):

@@ -26,9 +26,8 @@ class SetEdge(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        active = context.active_object is not None
-        edit = context.active_object.mode == "EDIT"
-        return active and edit
+        active = context.active_object
+        return active is not None and active.mode == 'EDIT'
 
     def execute(self, context):
         bpy.ops.mesh.select_mode(type='EDGE')

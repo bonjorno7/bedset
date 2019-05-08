@@ -1,5 +1,5 @@
 import bpy
-from . autosmooth import AutoSmooth
+from . auto_smooth import AutoSmooth
 from . bevel_object import BevelObject
 
 
