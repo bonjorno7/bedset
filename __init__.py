@@ -21,7 +21,7 @@ bl_info = {
     "name": "BedSet",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 0, 5),
+    "version": (0, 0, 6),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",

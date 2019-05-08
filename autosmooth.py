@@ -32,6 +32,10 @@ class AutoSmooth(bpy.types.Operator):
         default=False,
     )
 
+    @classmethod
+    def poll(cls, context):
+        return context.active_object is not None
+
     def execute(self, context):
         mesh = context.active_object.data
         mesh.use_auto_smooth = self.smooth

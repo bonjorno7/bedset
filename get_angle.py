@@ -32,33 +32,23 @@ class GetAngle(bpy.types.Operator):
         edit = context.active_object.mode == "EDIT"
         return active and edit
 
-    def select(self, e):
-        a = e.calc_face_angle(None)
-
-        if a is None:
-            if self.single_face:
-                e.select = True
-
-        elif a > self.angle:
-            e.select = True
-
     def execute(self, context):
         bpy.ops.mesh.select_mode(type='EDGE')
         mesh = context.active_object.data
         bm = bmesh.from_edit_mesh(mesh)
+
         selected = [e for e in bm.edges if e.select]
+        selected = selected if selected else bm.edges
 
-        if selected:
-            for e in selected:
-                for f in e.link_faces:
-                    f.select = False
+        for f in bm.faces:
+            f.select = False
 
-            for e in selected:
-                self.select(e)
-
-        else:
-            for e in bm.edges:
-                self.select(e)
+        for e in selected:
+            a = e.calc_face_angle(None)
+            if a is None:
+                e.select = self.single_face
+            else:
+                e.select = a > self.angle
 
         bmesh.update_edit_mesh(mesh)
         return {'FINISHED'}

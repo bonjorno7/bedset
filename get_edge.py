@@ -38,12 +38,11 @@ class GetEdge(bpy.types.Operator):
         selected = [e for e in bm.edges if e.select]
         selected = selected if selected else bm.edges
 
+        for f in bm.faces:
+            f.select = False
+
         bevel = bm.edges.layers.bevel_weight.verify()
         crease = bm.edges.layers.crease.verify()
-
-        for e in selected:
-            for f in e.link_faces:
-                f.select = False
 
         for e in selected:
             if self.kind == 'SEAM':
@@ -75,17 +74,6 @@ class GetEdge(bpy.types.Operator):
 
         bmesh.update_edit_mesh(mesh)
         return {'FINISHED'}
-
-    def execute(self, context):
-        bpy.ops.mesh.select_mode(type='EDGE')
-        mesh = context.active_object.data
-        bm = bmesh.from_edit_mesh(mesh)
-
-        bevel = bm.edges.layers.bevel_weight.verify()
-        crease = bm.edges.layers.crease.verify()
-
-        selected = [e for e in bm.edges if e.select]
-        selected = selected if selected else bm.edges
 
     def draw(self, context):
         self.layout.prop(self, "kind")
