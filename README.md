@@ -31,3 +31,7 @@ smooth faces and enable auto smooth on selected objects
 #### BevelObject
 
 add weighted bevel modifier to selected objects
+
+#### Other
+
+added Remove Doubles to the X delete menu
