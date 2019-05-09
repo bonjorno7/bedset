@@ -1,5 +1,6 @@
 import bpy
 from . object_boolean import ObjectBoolean
+from . apply_boolean import ApplyBoolean
 
 
 class ObjectBooleanMenu(bpy.types.Menu):
@@ -23,6 +24,6 @@ class ObjectBooleanMenu(bpy.types.Menu):
         ).kind = 'INTERSECT'
 
         self.layout.operator(
-            ObjectBoolean.bl_idname,
+            ApplyBoolean.bl_idname,
             text="Apply",
-        ).kind = 'APPLY'
+        )

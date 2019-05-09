@@ -11,6 +11,7 @@ from . edit_boolean import EditBoolean
 from . edit_boolean_menu import EditBooleanMenu
 
 from . object_boolean import ObjectBoolean
+from . apply_boolean import ApplyBoolean
 from . object_boolean_menu import ObjectBooleanMenu
 
 from . auto_smooth import AutoSmooth
@@ -36,7 +37,7 @@ classes = (
     GetAngle, GetEdge, GetEdgeMenu,
     SetEdge, SetEdgeMenu,
     EditBoolean, EditBooleanMenu,
-    ObjectBoolean, ObjectBooleanMenu,
+    ObjectBoolean, ApplyBoolean, ObjectBooleanMenu,
     AutoSmooth, BevelObject, ExtraMenu,
     BedsetMenu,
 )
