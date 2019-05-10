@@ -1,24 +1,24 @@
 import bpy
 
+from . edit_boolean import EditBoolean
+from . menus import EditBooleanMenu
+
 from . get_angle import GetAngle
 from . get_edge import GetEdge
-from . get_edge_menu import GetEdgeMenu
+from . menus import GetEdgeMenu
 
 from . set_edge import SetEdge
-from . set_edge_menu import SetEdgeMenu
-
-from . edit_boolean import EditBoolean
-from . edit_boolean_menu import EditBooleanMenu
+from . menus import SetEdgeMenu
 
 from . object_boolean import ObjectBoolean
 from . apply_boolean import ApplyBoolean
-from . object_boolean_menu import ObjectBooleanMenu
+from . menus import ObjectBooleanMenu
 
 from . auto_smooth import AutoSmooth
 from . bevel_object import BevelObject
-from . extra_menu import ExtraMenu
+from . menus import ExtraMenu
 
-from . bedset_menu import BedsetMenu
+from . menus import BedsetMenu
 
 
 bl_info = {
@@ -26,7 +26,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 0, 8),
+    "version": (0, 0, 9),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
