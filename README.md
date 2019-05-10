@@ -20,9 +20,15 @@ difference, union, intersect, cut
 
 #### ObjectBoolean
 
-difference, union, intersect, apply
+difference, union, intersect
 
 makes cutters display as wireframe
+
+#### ApplyBoolean
+
+apply boolean modifiers on selected objects
+
+makes cutters display as textured again
 
 #### AutoSmooth
 
