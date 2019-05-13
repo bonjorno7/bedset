@@ -12,6 +12,7 @@ from . apply_boolean import ApplyBoolean
 
 from . auto_smooth import AutoSmooth
 from . bevel_object import BevelObject
+from . export_obj import ExportObj
 
 
 class EditBooleanMenu(bpy.types.Menu):
@@ -180,6 +181,7 @@ class ExtraMenu(bpy.types.Menu):
     def draw(self, context):
         self.layout.operator(AutoSmooth.bl_idname)
         self.layout.operator(BevelObject.bl_idname)
+        self.layout.operator(ExportObj.bl_idname)
 
 
 class BedsetMenu(bpy.types.Menu):

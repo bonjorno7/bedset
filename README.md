@@ -38,6 +38,10 @@ smooth faces and enable auto smooth on selected objects
 
 add weighted bevel modifier to selected objects
 
+#### ExportObj
+
+export the selected objects to separate obj files
+
 #### Other
 
 added Remove Doubles to the X delete menu
