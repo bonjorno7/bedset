@@ -47,7 +47,7 @@ class ExportObj(bpy.types.Operator):
                 use_triangles=False,
                 use_nurbs=False,
                 use_vertex_groups=False,
-                use_blen_objects=False,
+                use_blen_objects=True,
                 group_by_object=False,
                 group_by_material=False,
                 keep_vertex_order=False,
