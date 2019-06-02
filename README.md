@@ -2,6 +2,10 @@
 
 ### Some tools to make Blender more comfortable
 
+#### Baking
+
+Bake PBR textures from selected to active with one click
+
 #### GetAngle
 
 select edges based on angle
