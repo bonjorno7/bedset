@@ -1,5 +1,9 @@
 import bpy
 
+from . bake import BakeSettings
+from . bake import Bake
+from . bake import BakePanel
+
 from . edit_boolean import EditBoolean
 from . menus import EditBooleanMenu
 
@@ -27,7 +31,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 0),
+    "version": (0, 1, 1),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -35,6 +39,7 @@ bl_info = {
 
 
 classes = (
+    BakeSettings, Bake, BakePanel,
     GetAngle, GetEdge, GetEdgeMenu,
     SetEdge, SetEdgeMenu,
     EditBoolean, EditBooleanMenu,
@@ -56,6 +61,8 @@ def register():
     for c in classes:
         bpy.utils.register_class(c)
 
+    bpy.types.Scene.BedsetBakeSettings = bpy.props.PointerProperty(type=BakeSettings)
+
     bpy.types.VIEW3D_MT_edit_mesh_delete.append(remove_doubles_in_delete_menu)
 
     kc = bpy.context.window_manager.keyconfigs.addon
@@ -69,6 +76,8 @@ def register():
 def unregister():
     for c in classes:
         bpy.utils.unregister_class(c)
+
+    del bpy.types.Scene.BedsetBakeSettings
 
     bpy.types.VIEW3D_MT_edit_mesh_delete.remove(remove_doubles_in_delete_menu)
 
