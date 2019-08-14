@@ -4,26 +4,19 @@ from . bake import BakeSettings
 from . bake import Bake
 from . bake import BakePanel
 
+from . object_boolean import ObjectBoolean
+from . apply_boolean import ApplyBoolean
 from . edit_boolean import EditBoolean
-from . menus import EditBooleanMenu
 
 from . get_angle import GetAngle
 from . get_edge import GetEdge
-from . menus import GetEdgeMenu
-
 from . set_edge import SetEdge
-from . menus import SetEdgeMenu
-
-from . object_boolean import ObjectBoolean
-from . apply_boolean import ApplyBoolean
-from . menus import ObjectBooleanMenu
 
 from . auto_smooth import AutoSmooth
 from . bevel_object import BevelObject
 from . export_obj import ExportObj
-from . menus import ExtraMenu
 
-from . menus import BedsetMenu
+from . menus import *
 
 
 bl_info = {
@@ -31,7 +24,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 1),
+    "version": (0, 1, 2),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -40,11 +33,17 @@ bl_info = {
 
 classes = (
     BakeSettings, Bake, BakePanel,
-    GetAngle, GetEdge, GetEdgeMenu,
-    SetEdge, SetEdgeMenu,
-    EditBoolean, EditBooleanMenu,
-    ObjectBoolean, ApplyBoolean, ObjectBooleanMenu,
-    AutoSmooth, BevelObject, ExportObj, ExtraMenu,
+    ObjectBoolean, ApplyBoolean, EditBoolean,
+    GetAngle, GetEdge, SetEdge,
+    AutoSmooth, BevelObject, ExportObj,
+    BooleansMenu, CallBooleansMenu,
+    ModifiersMenu, CallModifiersMenu,
+    OtherMenu, CallOtherMenu,
+    SelectEdgesMenu, CallSelectEdgesMenu,
+    SelectEdgesInvertedMenu, CallSelectEdgesInvertedMenu,
+    MarkEdgesMenu, CallMarkEdgesMenu,
+    ClearEdgesMenu, CallClearEdgesMenu,
+    EdgesMenu, CallEdgesMenu,
     BedsetMenu,
 )
 
@@ -68,7 +67,7 @@ def register():
     kc = bpy.context.window_manager.keyconfigs.addon
     km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
 
-    kmi_mnu = km.keymap_items.new("wm.call_menu", "Q", "PRESS", alt=True)
+    kmi_mnu = km.keymap_items.new("wm.call_menu_pie", "B", "PRESS")
     kmi_mnu.properties.name = BedsetMenu.bl_idname
     addon_keymaps.append((km, kmi_mnu))
 

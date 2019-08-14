@@ -29,11 +29,14 @@ class ObjectBoolean(bpy.types.Operator):
 
         for o in context.selected_objects:
             if not o is active:
-                boolean = active.modifiers.new(
-                    name="Bedset Boolean", type='BOOLEAN')
+                boolean = active.modifiers.new(name='Boolean', type='BOOLEAN')
                 boolean.operation = self.kind
                 boolean.object = o
                 o.display_type = 'WIRE'
+                o.hide_render = True
+
+        active.select_set(False)
+        context.view_layer.objects.active = context.selected_objects[0]
 
         return {'FINISHED'}
 

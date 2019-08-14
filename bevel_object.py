@@ -41,12 +41,12 @@ class BevelObject(bpy.types.Operator):
             bevel = None
 
             for m in o.modifiers:
-                if m.name.startswith("Bedset Bevel"):
+                if m.type == 'BEVEL':
                     bevel = m
                     break
 
             if not bevel:
-                bevel = o.modifiers.new(name="Bedset Bevel", type='BEVEL')
+                bevel = o.modifiers.new(name='Bevel', type='BEVEL')
 
             bevel.width = self.width
             bevel.segments = self.segments

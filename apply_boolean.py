@@ -20,7 +20,7 @@ class ApplyBoolean(bpy.types.Operator):
         for o in context.selected_objects:
             bpy.context.view_layer.objects.active = o
             for m in o.modifiers:
-                if m.name.startswith("Bedset Boolean"):
+                if m.type == 'BOOLEAN':
                     m.object.display_type = 'TEXTURED'
                     bpy.ops.object.modifier_apply(modifier=m.name)
 
