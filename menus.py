@@ -1,16 +1,18 @@
 import bpy
 
-from . get_angle import GetAngle
-from . get_edge import GetEdge
-from . set_edge import SetEdge
+from . booleans . edit import EditBoolean
+from . booleans . mod import ModBoolean
+from . booleans . apply import ApplyBoolean
 
-from . edit_boolean import EditBoolean
-from . object_boolean import ObjectBoolean
-from . apply_boolean import ApplyBoolean
+from . modifiers . bevel import Bevel
+from . modifiers . solidify import Solidify
 
-from . auto_smooth import AutoSmooth
-from . bevel_object import BevelObject
-from . export_obj import ExportObj
+from . other . auto_smooth import AutoSmooth
+from . other . export_obj import ExportObj
+
+from . edges . get_angle import GetAngle
+from . edges . get_edge import GetEdge
+from . edges . set_edge import SetEdge
 
 
 def in_edit_mode(context):
@@ -31,9 +33,9 @@ class BooleansMenu(bpy.types.Menu):
             pie.operator(EditBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
             pie.operator(EditBoolean.bl_idname, text="(C) Cut", icon='MOD_OPACITY').kind = 'CUT'
         else:
-            pie.operator(ObjectBoolean.bl_idname, text="(D) Difference", icon='SELECT_SUBTRACT').kind = 'DIFFERENCE'
-            pie.operator(ObjectBoolean.bl_idname, text="(U) Union", icon='SELECT_EXTEND').kind = 'UNION'
-            pie.operator(ObjectBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
+            pie.operator(ModBoolean.bl_idname, text="(D) Difference", icon='SELECT_SUBTRACT').kind = 'DIFFERENCE'
+            pie.operator(ModBoolean.bl_idname, text="(U) Union", icon='SELECT_EXTEND').kind = 'UNION'
+            pie.operator(ModBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
             pie.operator(ApplyBoolean.bl_idname, text="(A) Apply", icon='CHECKBOX_HLT')
 
 
@@ -52,7 +54,8 @@ class ModifiersMenu(bpy.types.Menu):
 
     def draw(self, context):
         pie = self.layout.menu_pie()
-        pie.operator(BevelObject.bl_idname, text="(B) Bevel", icon='MOD_BEVEL')
+        pie.operator(Bevel.bl_idname, text=Bevel.bl_label, icon=Bevel.bl_icon)
+        pie.operator(Solidify.bl_idname, text=Solidify.bl_label, icon=Solidify.bl_icon)
         # TODO: Add subdivide, solidify, sphere cast, etc.
         # TODO: Something to make a new object with modifiers applied.
 

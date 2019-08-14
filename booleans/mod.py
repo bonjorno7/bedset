@@ -1,10 +1,10 @@
 import bpy
 
 
-class ObjectBoolean(bpy.types.Operator):
+class ModBoolean(bpy.types.Operator):
     """Add boolean modifiers with selected on active"""
-    bl_idname = "bedset.object_boolean"
-    bl_label = "Object Boolean"
+    bl_idname = "bedset.mod_boolean"
+    bl_label = "Modifier Boolean"
     bl_options = {'REGISTER', 'UNDO'}
 
     kind: bpy.props.EnumProperty(

@@ -2,50 +2,56 @@
 
 ### Some tools to make Blender more comfortable
 
+#### Pie menus
+
+Press B to open the Bedset pie, you can figure it out from there
+
 #### Baking
 
-Bake PBR textures from selected to active with one click
+Bake PBR textures from selected to active with one click, cage required
+
+The panel can be found in the Bedset tab, which is in the place all add-ons put their panels (press N in the 3D view)
 
 #### GetAngle
 
-select edges based on angle
+Select edges based on angle
 
 #### GetEdge
 
-select edges based on seam / sharp / bevel / crease
+Select edges based on seam / sharp / bevel / crease
 
 #### SetEdge
 
-mark / clear edges as seam / sharp / bevel / crease
+Mark / Clear edges as seam / sharp / bevel / crease
 
 #### EditBoolean
 
-difference, union, intersect, cut
+Difference, union, intersect, cut
 
-#### ObjectBoolean
+#### ModBoolean
 
-difference, union, intersect
+Difference, union, intersect
 
-makes cutters display as wireframe
+Makes cutters display as wireframe and hidden from renders
 
 #### ApplyBoolean
 
-apply boolean modifiers on selected objects
+Apply boolean modifiers on selected objects
 
-makes cutters display as textured again
+Does not make cutters display as textured or visible in renders, since a cutter usually stays a cutter
 
 #### AutoSmooth
 
-smooth faces and enable auto smooth on selected objects
+Smooth faces and enable auto smooth with specified angle on selected objects
 
-#### BevelObject
+#### Bevel
 
-add weighted bevel modifier to selected objects
+Add weighted bevel modifier to selected objects
 
 #### ExportObj
 
-export the selected objects to separate obj files
+Export the selected objects to separate obj files, requires you to save your project first
 
 #### Other
 
-added Remove Doubles to the X delete menu
+Added Remove Doubles to the X delete menu

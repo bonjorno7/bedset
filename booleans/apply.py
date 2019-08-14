@@ -21,7 +21,6 @@ class ApplyBoolean(bpy.types.Operator):
             bpy.context.view_layer.objects.active = o
             for m in o.modifiers:
                 if m.type == 'BOOLEAN':
-                    m.object.display_type = 'TEXTURED'
                     bpy.ops.object.modifier_apply(modifier=m.name)
 
         bpy.context.view_layer.objects.active = active

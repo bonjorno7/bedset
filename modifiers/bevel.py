@@ -1,10 +1,11 @@
 import bpy
 
 
-class BevelObject(bpy.types.Operator):
-    """Add a weighted bevel modifier to the active object"""
-    bl_idname = "bedset.bevel_object"
-    bl_label = "Bevel Object"
+class Bevel(bpy.types.Operator):
+    """Add weighted bevel modifiers to the selected objects"""
+    bl_idname = "bedset.modifier_bevel"
+    bl_label = "(B) Bevel"
+    bl_icon = 'MOD_BEVEL'
     bl_options = {'REGISTER', 'UNDO'}
 
     width: bpy.props.FloatProperty(
@@ -29,7 +30,7 @@ class BevelObject(bpy.types.Operator):
         soft_min=1,
         soft_max=64,
         step=1,
-        subtype='DISTANCE',
+        subtype='UNSIGNED',
     )
 
     @classmethod
@@ -38,19 +39,19 @@ class BevelObject(bpy.types.Operator):
 
     def execute(self, context):
         for o in context.selected_objects:
-            bevel = None
+            mod = None
 
             for m in o.modifiers:
                 if m.type == 'BEVEL':
-                    bevel = m
+                    mod = m
                     break
 
-            if not bevel:
-                bevel = o.modifiers.new(name='Bevel', type='BEVEL')
+            if not mod:
+                mod = o.modifiers.new(name='Bevel', type='BEVEL')
 
-            bevel.width = self.width
-            bevel.segments = self.segments
-            bevel.limit_method = 'WEIGHT'
+            mod.width = self.width
+            mod.segments = self.segments
+            mod.limit_method = 'WEIGHT'
 
         return {'FINISHED'}
 
