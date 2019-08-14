@@ -44,9 +44,9 @@ Does not make cutters display as textured or visible in renders, since a cutter 
 
 Smooth faces and enable auto smooth with specified angle on selected objects
 
-#### Bevel
+#### Modifiers
 
-Add weighted bevel modifier to selected objects
+Bevel, solidify, more coming soon
 
 #### ExportObj
 
