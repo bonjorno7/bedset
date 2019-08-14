@@ -3,55 +3,43 @@
 ### Some tools to make Blender more comfortable
 
 #### Pie menus
+Press B to open the Bedset pie, you can figure it out from there.
 
-Press B to open the Bedset pie, you can figure it out from there
+#### Edges
 
-#### Baking
+* Select: select edges that meet the set criteria (seam, sharp, bevel, crease, angle)
+* Select Inverted: select edges that **don't** meet the criteria (seam, sharp, bevel, crease, any)
+* Mark: mark edges as seam, sharp, bevel, crease
+* Clear: clear edges of seam, sharp, bevel, crease, all
 
-Bake PBR textures from selected to active with one click, cage required
+#### Booleans in object mode
 
-The panel can be found in the Bedset tab, which is in the place all add-ons put their panels (press N in the 3D view)
+* Difference
+* Union
+* Intersect
+* Apply: applies all modifiers on selected objects
 
-#### GetAngle
+I'm working on adding Slice and Inset next.
 
-Select edges based on angle
+#### Booleans in edit mode
 
-#### GetEdge
-
-Select edges based on seam / sharp / bevel / crease
-
-#### SetEdge
-
-Mark / Clear edges as seam / sharp / bevel / crease
-
-#### EditBoolean
-
-Difference, union, intersect, cut
-
-#### ModBoolean
-
-Difference, union, intersect
-
-Makes cutters display as wireframe and hidden from renders
-
-#### ApplyBoolean
-
-Apply boolean modifiers on selected objects
-
-Does not make cutters display as textured or visible in renders, since a cutter usually stays a cutter
-
-#### AutoSmooth
-
-Smooth faces and enable auto smooth with specified angle on selected objects
+* Difference
+* Union
+* Intersect
+* Cut: uses the cutter like a knife
 
 #### Modifiers
 
-Bevel, solidify, more coming soon
+* Bevel
+* Solidify
 
-#### ExportObj
-
-Export the selected objects to separate obj files, requires you to save your project first
+I'm still thinking about which modifiers to add next, since I want to keep it minimal.
 
 #### Other
 
-Added Remove Doubles to the X delete menu
+* Auto Smooth: smooth the object and enable auto smooth with the specified angle
+* Export Obj: export each selected object to a .obj, you have to save the project first
+
+#### Baking
+
+I added PBR baking a while ago but didn't end up using it. You can find the panel in the Bedset tab, in the list of tabs that appears when you press N in the 3D view.
