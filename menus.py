@@ -30,13 +30,16 @@ class BooleansMenu(bpy.types.Menu):
         if in_edit_mode(context):
             pie.operator(EditBoolean.bl_idname, text="(D) Difference", icon='SELECT_SUBTRACT').kind = 'DIFFERENCE'
             pie.operator(EditBoolean.bl_idname, text="(U) Union", icon='SELECT_EXTEND').kind = 'UNION'
-            pie.operator(EditBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
             pie.operator(EditBoolean.bl_idname, text="(C) Cut", icon='MOD_OPACITY').kind = 'CUT'
+            pie.operator(EditBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
+
         else:
             pie.operator(ModBoolean.bl_idname, text="(D) Difference", icon='SELECT_SUBTRACT').kind = 'DIFFERENCE'
             pie.operator(ModBoolean.bl_idname, text="(U) Union", icon='SELECT_EXTEND').kind = 'UNION'
-            pie.operator(ModBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
             pie.operator(ApplyBoolean.bl_idname, text="(A) Apply", icon='CHECKBOX_HLT')
+            pie.operator(ModBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
+            pie.operator(ModBoolean.bl_idname, text="(E) Extract", icon='MOD_OPACITY').kind = 'EXTRACT'
+            pie.operator(ModBoolean.bl_idname, text="(N) Inset", icon='MOD_SOLIDIFY').kind = 'INSET'
 
 
 class CallBooleansMenu(bpy.types.Operator):
