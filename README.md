@@ -18,8 +18,8 @@ Press B to open the Bedset pie, you can figure it out from there.
 * Union
 * Intersect
 * Apply: applies all modifiers on selected objects
-
-I'm working on adding Slice and Inset next.
+* Inset: makes an inset inside the cutter
+* Extract: extracts the part of the target inside the cutter to a separate object
 
 #### Booleans in edit mode
 
