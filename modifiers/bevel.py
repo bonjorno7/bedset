@@ -25,12 +25,12 @@ class Bevel(bpy.types.Operator):
     def get_mod(self, context):
         self.mod = None
 
-        for m in context.object.modifiers:
-            if m.type == 'BEVEL':
-                self.mod = m
-                break
+        mods = [m for m in context.object.modifiers if m.type =='BEVEL']
 
-        if not self.mod:
+        if mods:
+            self.mod = mods[-1]
+
+        else:
             self.new = True
             self.mod = context.object.modifiers.new(name="Bevel", type='BEVEL')
             self.mod.limit_method = 'ANGLE'

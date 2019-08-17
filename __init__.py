@@ -2,10 +2,10 @@ import bpy
 
 from . booleans . edit import EditBoolean
 from . booleans . mod import ModBoolean
-from . booleans . apply import ApplyBoolean
 
 from . modifiers . bevel import Bevel
 from . modifiers . solidify import Solidify
+from . modifiers . apply import Apply
 
 from . other . auto_smooth import AutoSmooth
 from . other . export_obj import ExportObj
@@ -26,7 +26,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 3),
+    "version": (0, 1, 4),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -35,9 +35,9 @@ bl_info = {
 
 classes = (
     BakeSettings, Bake, BakePanel,
-    ModBoolean, ApplyBoolean, EditBoolean,
+    ModBoolean, EditBoolean,
     GetAngle, GetEdge, SetEdge,
-    Bevel, Solidify,
+    Bevel, Solidify, Apply,
     AutoSmooth, ExportObj,
     BooleansMenu, CallBooleansMenu,
     ModifiersMenu, CallModifiersMenu,

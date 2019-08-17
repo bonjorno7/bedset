@@ -2,10 +2,10 @@ import bpy
 
 from . booleans . edit import EditBoolean
 from . booleans . mod import ModBoolean
-from . booleans . apply import ApplyBoolean
 
 from . modifiers . bevel import Bevel
 from . modifiers . solidify import Solidify
+from . modifiers . apply import Apply
 
 from . other . auto_smooth import AutoSmooth
 from . other . export_obj import ExportObj
@@ -36,10 +36,9 @@ class BooleansMenu(bpy.types.Menu):
         else:
             pie.operator(ModBoolean.bl_idname, text="(D) Difference", icon='SELECT_SUBTRACT').kind = 'DIFFERENCE'
             pie.operator(ModBoolean.bl_idname, text="(U) Union", icon='SELECT_EXTEND').kind = 'UNION'
-            pie.operator(ApplyBoolean.bl_idname, text="(A) Apply", icon='CHECKBOX_HLT')
+            pie.operator(ModBoolean.bl_idname, text="(N) Inset", icon='MOD_SOLIDIFY').kind = 'INSET'
             pie.operator(ModBoolean.bl_idname, text="(I) Intersect", icon='SELECT_INTERSECT').kind = 'INTERSECT'
             pie.operator(ModBoolean.bl_idname, text="(E) Extract", icon='MOD_OPACITY').kind = 'EXTRACT'
-            pie.operator(ModBoolean.bl_idname, text="(N) Inset", icon='MOD_SOLIDIFY').kind = 'INSET'
 
 
 class CallBooleansMenu(bpy.types.Operator):
@@ -59,6 +58,7 @@ class ModifiersMenu(bpy.types.Menu):
         pie = self.layout.menu_pie()
         pie.operator(Bevel.bl_idname, text=Bevel.bl_label, icon=Bevel.bl_icon)
         pie.operator(Solidify.bl_idname, text=Solidify.bl_label, icon=Solidify.bl_icon)
+        pie.operator(Apply.bl_idname, text=Apply.bl_label, icon=Apply.bl_icon)
         # TODO: Add subdivide, solidify, sphere cast, etc.
         # TODO: Something to make a new object with modifiers applied.
 

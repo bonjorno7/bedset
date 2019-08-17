@@ -30,9 +30,9 @@ class ModBoolean(bpy.types.Operator):
     def duplicate(self, source, name):
         obj = source.copy()
         obj.name = name
-        mesh = source.data.copy()
-        mesh.name = name
-        obj.data = mesh
+        #mesh = source.data.copy()
+        #mesh.name = name
+        #obj.data = mesh
         col = source.users_collection[0]
         col.objects.link(obj)
         obj.select_set(False)
