@@ -17,7 +17,6 @@ Press B to open the Bedset pie, you can figure it out from there.
 * Difference
 * Union
 * Intersect
-* Apply: applies all modifiers on selected objects
 * Inset: makes an inset inside the cutter
 * Extract: extracts the part of the target inside the cutter to a separate object
 
@@ -30,6 +29,7 @@ Press B to open the Bedset pie, you can figure it out from there.
 
 #### Modifiers
 
+* Apply: duplicate selected objects, apply all modifiers
 * Bevel
 * Solidify
 
