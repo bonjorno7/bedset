@@ -59,8 +59,7 @@ class ModifiersMenu(bpy.types.Menu):
         pie.operator(Bevel.bl_idname, text=Bevel.bl_label, icon=Bevel.bl_icon)
         pie.operator(Solidify.bl_idname, text=Solidify.bl_label, icon=Solidify.bl_icon)
         pie.operator(Apply.bl_idname, text=Apply.bl_label, icon=Apply.bl_icon)
-        # TODO: Add subdivide, solidify, sphere cast, etc.
-        # TODO: Something to make a new object with modifiers applied.
+        # TODO: Mirror, Array, Circular Array
 
 
 class CallModifiersMenu(bpy.types.Operator):
