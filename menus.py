@@ -7,8 +7,9 @@ from . modifiers . bevel import Bevel
 from . modifiers . solidify import Solidify
 from . modifiers . apply import Apply
 
-from . other . auto_smooth import AutoSmooth
-from . other . export_obj import ExportObj
+from . object . auto_smooth import AutoSmooth
+from . object . export_obj import ExportObj
+from . object . move_origin import MoveOrigin
 
 from . edges . get_angle import GetAngle
 from . edges . get_edge import GetEdge
@@ -53,6 +54,7 @@ class CallBooleansMenu(bpy.types.Operator):
 class ModifiersMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_ModifiersMenu"
     bl_label = "(M) Modifiers"
+    bl_icon = 'MODIFIER'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -65,28 +67,30 @@ class ModifiersMenu(bpy.types.Menu):
 class CallModifiersMenu(bpy.types.Operator):
     bl_idname = "bedset.call_modifiers_menu"
     bl_label = "(M) Modifiers"
+    bl_icon = 'MODIFIER'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=ModifiersMenu.bl_idname)
         return {'FINISHED'}
 
 
-class OtherMenu(bpy.types.Menu):
-    bl_idname = "BEDSET_MT_OtherMenu"
-    bl_label = "(O) Other"
+class ObjectMenu(bpy.types.Menu):
+    bl_idname = "BEDSET_MT_ObjectMenu"
+    bl_label = "(O) Object"
 
     def draw(self, context):
         pie = self.layout.menu_pie()
-        pie.operator(AutoSmooth.bl_idname, text="(S) Auto Smooth", icon='MATSHADERBALL')
-        pie.operator(ExportObj.bl_idname, text="(E) Export Objs", icon='EXPORT')
+        pie.operator(AutoSmooth.bl_idname, text=AutoSmooth.bl_label, icon=AutoSmooth.bl_icon)
+        pie.operator(ExportObj.bl_idname, text=ExportObj.bl_label, icon=ExportObj.bl_icon)
+        pie.operator(MoveOrigin.bl_idname, text=MoveOrigin.bl_label, icon=MoveOrigin.bl_icon)
 
 
-class CallOtherMenu(bpy.types.Operator):
-    bl_idname = "bedset.call_other_menu"
-    bl_label = "(O) Other"
+class CallObjectMenu(bpy.types.Operator):
+    bl_idname = "bedset.call_object_menu"
+    bl_label = "(O) Object"
 
     def execute(self, context):
-        bpy.ops.wm.call_menu_pie(name=OtherMenu.bl_idname)
+        bpy.ops.wm.call_menu_pie(name=ObjectMenu.bl_idname)
         return {'FINISHED'}
 
 
@@ -207,7 +211,7 @@ class BedsetMenu(bpy.types.Menu):
 
         pie.operator(CallBooleansMenu.bl_idname, icon='MOD_BOOLEAN')
         pie.operator(CallModifiersMenu.bl_idname, icon='MODIFIER')
-        pie.operator(CallOtherMenu.bl_idname, icon='MONKEY')
+        pie.operator(CallObjectMenu.bl_idname, icon='OBJECT_DATA')
 
         if in_edit_mode(context):
             pie.operator(CallEdgesMenu.bl_idname, icon='EDGESEL')

@@ -6,7 +6,8 @@ import pathlib
 class ExportObj(bpy.types.Operator):
     """Export selected objects to Obj files"""
     bl_idname = "bedset.export_obj"
-    bl_label = "Export Obj"
+    bl_label = "(E) Export Obj"
+    bl_icon = 'EXPORT'
     bl_options = {'REGISTER'}
 
     @classmethod

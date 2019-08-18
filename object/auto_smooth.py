@@ -6,7 +6,8 @@ import math
 class AutoSmooth(bpy.types.Operator):
     """Turn on Auto Smooth for this mesh"""
     bl_idname = "bedset.auto_smooth"
-    bl_label = "Auto Smooth"
+    bl_label = "(S) Auto Smooth"
+    bl_icon = 'MATSHADERBALL'
     bl_options = {'REGISTER', 'UNDO'}
 
     smooth: bpy.props.BoolProperty(

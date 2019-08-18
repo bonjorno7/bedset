@@ -7,16 +7,17 @@ from . modifiers . bevel import Bevel
 from . modifiers . solidify import Solidify
 from . modifiers . apply import Apply
 
-from . other . auto_smooth import AutoSmooth
-from . other . export_obj import ExportObj
+from . object . auto_smooth import AutoSmooth
+from . object . export_obj import ExportObj
+from . object . move_origin import MoveOrigin
 
 from . edges . get_angle import GetAngle
 from . edges . get_edge import GetEdge
 from . edges . set_edge import SetEdge
 
-from . other . bake import BakeSettings
-from . other . bake import Bake
-from . other . bake import BakePanel
+from . bake import BakeSettings
+from . bake import Bake
+from . bake import BakePanel
 
 from . menus import *
 
@@ -26,7 +27,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 4),
+    "version": (0, 1, 5),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -38,10 +39,10 @@ classes = (
     ModBoolean, EditBoolean,
     GetAngle, GetEdge, SetEdge,
     Bevel, Solidify, Apply,
-    AutoSmooth, ExportObj,
+    AutoSmooth, ExportObj, MoveOrigin,
     BooleansMenu, CallBooleansMenu,
     ModifiersMenu, CallModifiersMenu,
-    OtherMenu, CallOtherMenu,
+    ObjectMenu, CallObjectMenu,
     SelectEdgesMenu, CallSelectEdgesMenu,
     SelectEdgesInvertedMenu, CallSelectEdgesInvertedMenu,
     MarkEdgesMenu, CallMarkEdgesMenu,
