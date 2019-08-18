@@ -1,16 +1,17 @@
-## Bedset
-
-### Some tools to make Blender more comfortable
+### Bedset is a collection of tools to make Blender more comfortable
 
 #### Pie menus
-Press B to open the Bedset pie, you can figure it out from there.
+* Press B to open the Bedset pie, you can figure it out from there
+* You can also navigate the menus easily with only the keyboard
 
 #### Edges
 
 * Select: select edges that meet the set criteria (seam, sharp, bevel, crease, angle)
-* Select Inverted: select edges that **don't** meet the criteria (seam, sharp, bevel, crease, any)
+* Select Inverted: select edges that *don't* meet the criteria (seam, sharp, bevel, crease, any)
 * Mark: mark edges as seam, sharp, bevel, crease
 * Clear: clear edges of seam, sharp, bevel, crease, all
+
+I might add a menu for faces too, if I get some ideas of what to put there.
 
 #### Booleans in object mode
 
@@ -33,12 +34,13 @@ Press B to open the Bedset pie, you can figure it out from there.
 * Bevel
 * Solidify
 
-I'm still thinking about which modifiers to add next, since I want to keep it minimal.
+Upcoming are Mirror, Array, Circular Array and maybe more.
 
-#### Other
+#### Object
 
 * Auto Smooth: smooth the object and enable auto smooth with the specified angle
-* Export Obj: export each selected object to a .obj, you have to save the project first
+* Export OBJs: export each selected object to a .obj (you have to save the project first)
+* Move Origin: move the origins of selected object to the 3D cursor
 
 #### Baking
 
