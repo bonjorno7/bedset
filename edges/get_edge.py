@@ -4,9 +4,9 @@ import bmesh
 
 class GetEdge(bpy.types.Operator):
     """Select edges based on Seam / Sharp / Bevel / Crease"""
+    bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.get_edge"
     bl_label = "Get Edge"
-    bl_options = {'REGISTER', 'UNDO'}
 
     kind: bpy.props.EnumProperty(
         name="Kind",

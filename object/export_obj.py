@@ -4,11 +4,10 @@ import pathlib
 
 
 class ExportObj(bpy.types.Operator):
-    """Export selected objects to Obj files"""
-    bl_idname = "bedset.export_obj"
-    bl_label = "(E) Export Obj"
-    bl_icon = 'EXPORT'
+    """Export selected objects to OBJ files"""
     bl_options = {'REGISTER'}
+    bl_idname = "bedset.export_obj"
+    bl_label = "Export OBJs"
 
     @classmethod
     def poll(cls, context):

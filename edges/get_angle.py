@@ -5,9 +5,9 @@ import math
 
 class GetAngle(bpy.types.Operator):
     """Select edges based on angle"""
+    bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.get_angle"
     bl_label = "Get Angle"
-    bl_options = {'REGISTER', 'UNDO'}
 
     angle: bpy.props.FloatProperty(
         name="Angle",

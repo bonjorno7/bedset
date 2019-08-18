@@ -5,8 +5,7 @@ class Apply(bpy.types.Operator):
     """Apply modifiers on selected objects"""
     bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.apply"
-    bl_label = "(A) Apply"
-    bl_icon='CHECKBOX_HLT'
+    bl_label = "Apply Modifiers"
 
     @classmethod
     def poll(cls, context):

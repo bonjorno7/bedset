@@ -3,9 +3,9 @@ import bpy
 
 class Bevel(bpy.types.Operator):
     bl_options = {"REGISTER", "UNDO", "GRAB_CURSOR", "BLOCKING"}
+    """Add a bevel modifier to the selected objects"""
     bl_idname = "bedset.bevel"
-    bl_label = "(B) Bevel"
-    bl_icon = 'MOD_BEVEL'
+    bl_label = "Bevel Modifier"
 
     @classmethod
     def poll(cls, context):

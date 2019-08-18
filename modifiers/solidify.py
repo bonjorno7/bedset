@@ -2,10 +2,10 @@ import bpy
 
 
 class Solidify(bpy.types.Operator):
+    """Add a solidify modifier to the selected objects"""
     bl_options = {"REGISTER", "UNDO", "GRAB_CURSOR", "BLOCKING"}
     bl_idname = "bedset.solidify"
-    bl_label = "(Y) Solidify"
-    bl_icon = 'MOD_SOLIDIFY'
+    bl_label = "Solidify Modifier"
 
     @classmethod
     def poll(cls, context):

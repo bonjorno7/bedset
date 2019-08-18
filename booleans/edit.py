@@ -4,9 +4,9 @@ import bmesh
 
 class EditBoolean(bpy.types.Operator):
     """Perform boolean operation with selected on unselected"""
+    bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.edit_boolean"
     bl_label = "Edit Boolean"
-    bl_options = {'REGISTER', 'UNDO'}
 
     kind: bpy.props.EnumProperty(
         name="Kind",

@@ -1,6 +1,5 @@
 import bpy
 import bmesh
-import mathutils
 
 
 # TODO: Some options for where to move it, instead of just to the 3D cursor
@@ -8,10 +7,9 @@ import mathutils
 
 class MoveOrigin(bpy.types.Operator):
     """Move origins of the selected objects"""
-    bl_idname = "bedset.move_origin"
-    bl_label = "(O) Move Origin"
-    bl_icon = "OBJECT_ORIGIN"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_idname = "bedset.move_origin"
+    bl_label = "Move Origin"
 
     @classmethod
     def poll(cls, context):

@@ -3,10 +3,10 @@ import bmesh
 
 
 class SetEdge(bpy.types.Operator):
-    """Mark / Clear selected edges as Seam / Sharp / Bevel / Crease"""
+    """Mark / Clear selected edges of Seam / Sharp / Bevel / Crease"""
+    bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.set_edge"
     bl_label = "Set Edge"
-    bl_options = {'REGISTER', 'UNDO'}
 
     kind: bpy.props.EnumProperty(
         name="Kind",

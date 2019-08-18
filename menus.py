@@ -24,6 +24,7 @@ def in_edit_mode(context):
 class BooleansMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_BooleansMenu"
     bl_label = "(B) Booleans"
+    bl_icon = 'MOD_BOOLEAN'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -45,6 +46,7 @@ class BooleansMenu(bpy.types.Menu):
 class CallBooleansMenu(bpy.types.Operator):
     bl_idname = "bedset.call_booleans_menu"
     bl_label = "(B) Booleans"
+    bl_icon = 'MOD_BOOLEAN'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=BooleansMenu.bl_idname)
@@ -58,9 +60,9 @@ class ModifiersMenu(bpy.types.Menu):
 
     def draw(self, context):
         pie = self.layout.menu_pie()
-        pie.operator(Bevel.bl_idname, text=Bevel.bl_label, icon=Bevel.bl_icon)
-        pie.operator(Solidify.bl_idname, text=Solidify.bl_label, icon=Solidify.bl_icon)
-        pie.operator(Apply.bl_idname, text=Apply.bl_label, icon=Apply.bl_icon)
+        pie.operator(Bevel.bl_idname, text="(B) Bevel", icon='MOD_BEVEL')
+        pie.operator(Solidify.bl_idname, text="(Y) Solidify", icon='MOD_SOLIDIFY')
+        pie.operator(Apply.bl_idname, text="(A) Apply", icon='CHECKBOX_HLT')
         # TODO: Mirror, Array, Circular Array
 
 
@@ -77,48 +79,29 @@ class CallModifiersMenu(bpy.types.Operator):
 class ObjectMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_ObjectMenu"
     bl_label = "(O) Object"
+    bl_icon = 'OBJECT_DATA'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
-        pie.operator(AutoSmooth.bl_idname, text=AutoSmooth.bl_label, icon=AutoSmooth.bl_icon)
-        pie.operator(ExportObj.bl_idname, text=ExportObj.bl_label, icon=ExportObj.bl_icon)
-        pie.operator(MoveOrigin.bl_idname, text=MoveOrigin.bl_label, icon=MoveOrigin.bl_icon)
+        pie.operator(AutoSmooth.bl_idname, text="(S) Auto Smooth", icon='MATSHADERBALL')
+        pie.operator(ExportObj.bl_idname, text="(E) Export OBJ", icon='EXPORT')
+        pie.operator(MoveOrigin.bl_idname, text="(O) Move Origin", icon='OBJECT_ORIGIN')
 
 
 class CallObjectMenu(bpy.types.Operator):
     bl_idname = "bedset.call_object_menu"
     bl_label = "(O) Object"
+    bl_icon = 'OBJECT_DATA'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=ObjectMenu.bl_idname)
         return {'FINISHED'}
 
 
-class SelectEdgesInvertedMenu(bpy.types.Menu):
-    bl_idname = "BEDSET_MT_SelectEdgesInvertedMenu"
-    bl_label = "(I) Select Inverted"
-
-    def draw(self, context):
-        pie = self.layout.menu_pie()
-        pie.operator(GetEdge.bl_idname, text="(S) Seam").kind = 'NOT_SEAM'
-        pie.operator(GetEdge.bl_idname, text="(H) Sharp").kind = 'NOT_SHARP'
-        pie.operator(GetEdge.bl_idname, text="(B) Bevel").kind = 'NOT_BEVEL'
-        pie.operator(GetEdge.bl_idname, text="(C) Crease").kind = 'NOT_CREASE'
-        pie.operator(GetEdge.bl_idname, text="(X) Any").kind = 'NOT_ANY'
-
-
-class CallSelectEdgesInvertedMenu(bpy.types.Operator):
-    bl_idname = "bedset.call_select_edges_inverted_menu"
-    bl_label = "(I) Select Inverted"
-
-    def execute(self, context):
-        bpy.ops.wm.call_menu_pie(name=SelectEdgesInvertedMenu.bl_idname)
-        return {'FINISHED'}
-
-
 class SelectEdgesMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_SelectEdgesMenu"
     bl_label = "(S) Select"
+    bl_icon = 'ZOOM_IN'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -132,15 +115,41 @@ class SelectEdgesMenu(bpy.types.Menu):
 class CallSelectEdgesMenu(bpy.types.Operator):
     bl_idname = "bedset.call_select_edges_menu"
     bl_label = "(S) Select"
+    bl_icon = 'ZOOM_IN'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=SelectEdgesMenu.bl_idname)
         return {'FINISHED'}
 
 
+class SelectEdgesInvertedMenu(bpy.types.Menu):
+    bl_idname = "BEDSET_MT_SelectEdgesInvertedMenu"
+    bl_label = "(I) Select Inverted"
+    bl_icon = 'ZOOM_OUT'
+
+    def draw(self, context):
+        pie = self.layout.menu_pie()
+        pie.operator(GetEdge.bl_idname, text="(S) Seam").kind = 'NOT_SEAM'
+        pie.operator(GetEdge.bl_idname, text="(H) Sharp").kind = 'NOT_SHARP'
+        pie.operator(GetEdge.bl_idname, text="(B) Bevel").kind = 'NOT_BEVEL'
+        pie.operator(GetEdge.bl_idname, text="(C) Crease").kind = 'NOT_CREASE'
+        pie.operator(GetEdge.bl_idname, text="(X) Any").kind = 'NOT_ANY'
+
+
+class CallSelectEdgesInvertedMenu(bpy.types.Operator):
+    bl_idname = "bedset.call_select_edges_inverted_menu"
+    bl_label = "(I) Select Inverted"
+    bl_icon = 'ZOOM_OUTs'
+
+    def execute(self, context):
+        bpy.ops.wm.call_menu_pie(name=SelectEdgesInvertedMenu.bl_idname)
+        return {'FINISHED'}
+
+
 class MarkEdgesMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_MarkEdgesMenu"
     bl_label = "(M) Mark"
+    bl_icon = 'ADD'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -153,6 +162,7 @@ class MarkEdgesMenu(bpy.types.Menu):
 class CallMarkEdgesMenu(bpy.types.Operator):
     bl_idname = "bedset.call_mark_edges_menu"
     bl_label = "(M) Mark"
+    bl_icon = 'ADD'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=MarkEdgesMenu.bl_idname)
@@ -162,6 +172,7 @@ class CallMarkEdgesMenu(bpy.types.Operator):
 class ClearEdgesMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_ClearEdgesMenu"
     bl_label = "(C) Clear"
+    bl_icon = 'REMOVE'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -175,6 +186,7 @@ class ClearEdgesMenu(bpy.types.Menu):
 class CallClearEdgesMenu(bpy.types.Operator):
     bl_idname = "bedset.call_clear_edges_menu"
     bl_label = "(C) Clear"
+    bl_icon = 'REMOVE'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=ClearEdgesMenu.bl_idname)
@@ -184,6 +196,7 @@ class CallClearEdgesMenu(bpy.types.Operator):
 class EdgesMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_EdgesMenu"
     bl_label = "(E) Edges"
+    bl_icon = 'EDGESEL'
 
     def draw(self, context):
         pie = self.layout.menu_pie()
@@ -196,6 +209,7 @@ class EdgesMenu(bpy.types.Menu):
 class CallEdgesMenu(bpy.types.Operator):
     bl_idname = "bedset.call_edges_menu"
     bl_label = "(E) Edges"
+    bl_icon = 'EDGESEL'
 
     def execute(self, context):
         bpy.ops.wm.call_menu_pie(name=EdgesMenu.bl_idname)
@@ -205,6 +219,7 @@ class CallEdgesMenu(bpy.types.Operator):
 class BedsetMenu(bpy.types.Menu):
     bl_idname = "BEDSET_MT_BedsetMenu"
     bl_label = "(B) Bedset"
+    bl_icon = 'BOLD'
 
     def draw(self, context):
         pie = self.layout.menu_pie()

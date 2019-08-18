@@ -4,9 +4,9 @@ import bmesh
 
 class ModBoolean(bpy.types.Operator):
     """Add boolean modifiers with selected on active"""
+    bl_options = {'REGISTER', 'UNDO'}
     bl_idname = "bedset.mod_boolean"
     bl_label = "Modifier Boolean"
-    bl_options = {'REGISTER', 'UNDO'}
 
     kind: bpy.props.EnumProperty(
         name="Kind",
