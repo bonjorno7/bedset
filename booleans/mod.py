@@ -29,7 +29,7 @@ class ModBoolean(bpy.types.Operator):
 
     def duplicate(self, source, name):
         obj = source.copy()
-        obj.name = source.name + name
+        obj.name = name + " " + source.name
         col = source.users_collection[0]
         col.objects.link(obj)
         obj.select_set(False)
@@ -45,7 +45,7 @@ class ModBoolean(bpy.types.Operator):
         return self.duplicate(source, "Extract")
 
     def make_cutter(self, obj):
-        obj.name = "Cutter " + obj.name
+        obj.name = "Cutter" + " " + obj.name
         obj.display_type = 'WIRE'
         obj.hide_render = True
 
