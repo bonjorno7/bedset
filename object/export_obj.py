@@ -15,7 +15,11 @@ class ExportObj(bpy.types.Operator):
 
     def execute(self, context):
         blend = pathlib.Path(bpy.data.filepath)
-        folder = str(blend.resolve().parent)
+        blend = str(blend.resolve().parent)
+
+        folder = blend + os.sep + "objs"
+        if not os.path.exists(folder):
+            os.mkdir(folder)
 
         selected = []
         for o in context.selected_objects:
