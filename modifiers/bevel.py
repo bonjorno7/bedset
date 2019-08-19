@@ -33,6 +33,8 @@ class Bevel(bpy.types.Operator):
         else:
             self.new = True
             self.mod = context.object.modifiers.new(name="Bevel", type='BEVEL')
+            self.mod.miter_inner = 'MITER_SHARP'
+            self.mod.miter_outer = 'MITER_ARC'
             self.mod.limit_method = 'ANGLE'
             self.mod.width = self.prop_width
             self.mod.segments = self.prop_segments
