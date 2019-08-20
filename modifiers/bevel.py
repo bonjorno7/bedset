@@ -2,8 +2,8 @@ import bpy
 
 
 class Bevel(bpy.types.Operator):
-    bl_options = {"REGISTER", "UNDO", "GRAB_CURSOR", "BLOCKING"}
     """Add a bevel modifier to the selected objects"""
+    bl_options = {"REGISTER", "UNDO", "GRAB_CURSOR", "BLOCKING"}
     bl_idname = "bedset.bevel"
     bl_label = "Bevel Modifier"
 

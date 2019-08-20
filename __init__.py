@@ -5,11 +5,10 @@ from . booleans . mod import ModBoolean
 
 from . modifiers . bevel import Bevel
 from . modifiers . solidify import Solidify
-from . modifiers . apply import Apply
+from . modifiers . apply import ApplyModifiers
 
 from . object . auto_smooth import AutoSmooth
 from . object . export_obj import ExportObj
-from . object . move_origin import MoveOrigin
 
 from . edges . get_angle import GetAngle
 from . edges . get_edge import GetEdge
@@ -38,10 +37,12 @@ classes = (
     BakeSettings, Bake, BakePanel,
     ModBoolean, EditBoolean,
     GetAngle, GetEdge, SetEdge,
-    Bevel, Solidify, Apply,
-    AutoSmooth, ExportObj, MoveOrigin,
+    Bevel, Solidify, ApplyModifiers,
+    AutoSmooth, ExportObj,
     BooleansMenu, CallBooleansMenu,
     ModifiersMenu, CallModifiersMenu,
+    SetOriginMenu, CallSetOriginMenu,
+    ApplyTransformsMenu, CallApplyTransformsMenu,
     ObjectMenu, CallObjectMenu,
     SelectEdgesMenu, CallSelectEdgesMenu,
     SelectEdgesInvertedMenu, CallSelectEdgesInvertedMenu,
