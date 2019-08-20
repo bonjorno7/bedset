@@ -7,7 +7,7 @@
 #### Edges
 
 * Select: select edges that meet the set criteria (seam, sharp, bevel, crease, angle)
-* Select Inverted: select edges that *don't* meet the criteria (seam, sharp, bevel, crease, any)
+* Select Inverted: select edges that meet the opposite criteria (not seam, not sharp, not bevel, not crease, not any)
 * Mark: mark edges as seam, sharp, bevel, crease
 * Clear: clear edges of seam, sharp, bevel, crease, all
 
@@ -38,9 +38,10 @@ Upcoming are Mirror, Array, Circular Array and maybe more.
 
 #### Object
 
-* Auto Smooth: smooth the object and enable auto smooth with the specified angle
+* Auto Smooth: smooth the selected objects and enable auto smooth with the specified angle
 * Export OBJs: export each selected object to a .obj (you have to save the project first)
-* Move Origin: move the origins of selected object to the 3D cursor
+* Set Origin
+* Apply Transforms
 
 #### Baking
 
