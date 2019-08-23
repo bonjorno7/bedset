@@ -26,7 +26,7 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 5),
+    "version": (0, 1, 6),
     "location": "3D View > Sidebar",
     "category": "Mesh",
     "warning": "",
@@ -39,16 +39,16 @@ classes = (
     GetAngle, GetEdge, SetEdge,
     Bevel, Solidify, ApplyModifiers,
     AutoSmooth, ExportObj,
-    BooleansMenu, CallBooleansMenu,
-    ModifiersMenu, CallModifiersMenu,
-    SetOriginMenu, CallSetOriginMenu,
-    ApplyTransformsMenu, CallApplyTransformsMenu,
-    ObjectMenu, CallObjectMenu,
-    SelectEdgesMenu, CallSelectEdgesMenu,
-    SelectEdgesInvertedMenu, CallSelectEdgesInvertedMenu,
-    MarkEdgesMenu, CallMarkEdgesMenu,
-    ClearEdgesMenu, CallClearEdgesMenu,
-    EdgesMenu, CallEdgesMenu,
+    BooleansMenu,
+    ModifiersMenu,
+    SetOriginMenu,
+    ApplyTransformsMenu,
+    ObjectMenu,
+    SelectEdgesMenu,
+    SelectEdgesInvertedMenu,
+    MarkEdgesMenu,
+    ClearEdgesMenu,
+    EdgesMenu,
     BedsetMenu,
 )
 
@@ -72,9 +72,14 @@ def register():
     kc = bpy.context.window_manager.keyconfigs.addon
     km = kc.keymaps.new(name="3D View", space_type='VIEW_3D')
 
-    kmi_mnu = km.keymap_items.new("wm.call_menu_pie", "B", 'PRESS')
-    kmi_mnu.properties.name = BedsetMenu.bl_idname
-    addon_keymaps.append((km, kmi_mnu))
+    kmi = km.keymap_items.new("wm.call_menu_pie", "B", 'PRESS')
+    kmi.properties.name = BedsetMenu.bl_idname
+    addon_keymaps.append((km, kmi))
+
+#    I can't figure out how to overwrite Shift + E, so I'm not sure what I want to do right now
+#    kmi = km.keymap_items.new("wm.call_menu_pie", "FIVE", 'PRESS')
+#    kmi.properties.name = EdgesMenu.bl_idname
+#    addon_keymaps.append((km, kmi))
 
 
 def unregister():
