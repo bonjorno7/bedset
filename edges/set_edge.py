@@ -16,6 +16,7 @@ class SetEdge(bpy.types.Operator):
             ('MARK_SHARP', "Mark Sharp", "Mark selected edges as Sharp"),
             ('MARK_BEVEL', "Mark Bevel", "Mark selected edges as Bevel"),
             ('MARK_CREASE', "Mark Crease", "Mark selected edges as Crease"),
+            ('MARK_ALL', "Mark All", "Mark selected edges as All"),
             ('CLEAR_SEAM', "Clear Seam", "Clear Seam from selected edges"),
             ('CLEAR_SHARP', "Clear Sharp", "Clear Sharp from selected edges"),
             ('CLEAR_BEVEL', "Clear Bevel", "Clear Bevel from selected edges"),
@@ -48,12 +49,19 @@ class SetEdge(bpy.types.Operator):
             for e in selected:
                 e.smooth = False
 
-        if self.kind == "MARK_BEVEL":
+        if self.kind == 'MARK_BEVEL':
             for e in selected:
                 e[bevel] = 1
 
-        if self.kind == "MARK_CREASE":
+        if self.kind == 'MARK_CREASE':
             for e in selected:
+                e[crease] = 1
+
+        if self.kind == 'MARK_ALL':
+            for e in selected:
+                e.seam = True
+                e.smooth = False
+                e[bevel] = 1
                 e[crease] = 1
 
         if self.kind == 'CLEAR_SEAM':
@@ -64,15 +72,15 @@ class SetEdge(bpy.types.Operator):
             for e in selected:
                 e.smooth = True
 
-        if self.kind == "CLEAR_BEVEL":
+        if self.kind == 'CLEAR_BEVEL':
             for e in selected:
                 e[bevel] = 0
 
-        if self.kind == "CLEAR_CREASE":
+        if self.kind == 'CLEAR_CREASE':
             for e in selected:
                 e[crease] = 0
 
-        if self.kind == "CLEAR_ALL":
+        if self.kind == 'CLEAR_ALL':
             for e in selected:
                 e.seam = False
                 e.smooth = True
