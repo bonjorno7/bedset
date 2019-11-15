@@ -37,16 +37,11 @@ class EditBoolean(bpy.types.Operator):
         return verts + edges + faces
 
     def execute(self, context):
-        if self.kind == 'DIFFERENCE':
-            bpy.ops.mesh.intersect_boolean(operation='DIFFERENCE')
+        if self.kind in ['DIFFERENCE', 'UNION', 'INTERSECT']:
+            bpy.ops.mesh.intersect_boolean(operation=self.kind)
 
-        if self.kind == 'UNION':
-            bpy.ops.mesh.intersect_boolean(operation='UNION')
 
-        if self.kind == 'INTERSECT':
-            bpy.ops.mesh.intersect_boolean(operation='INTERSECT')
-
-        if self.kind == 'CUT':
+        elif self.kind == 'CUT':
             mesh = context.active_object.data
             bm = bmesh.from_edit_mesh(mesh)
             cutter = self.selected(bm)
