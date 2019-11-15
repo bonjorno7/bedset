@@ -51,10 +51,10 @@ class GetEdge(bpy.types.Operator):
                 e.select = not e.smooth
 
             elif self.kind == 'BEVEL':
-                e.select = e[bevel]
+                e.select = e[bevel] != 0
 
             elif self.kind == 'CREASE':
-                e.select = e[crease]
+                e.select = e[crease] != 0
 
             elif self.kind == 'NOT_SEAM':
                 e.select = not e.seam
@@ -63,13 +63,13 @@ class GetEdge(bpy.types.Operator):
                 e.select = e.smooth
 
             elif self.kind == 'NOT_BEVEL':
-                e.select = not e[bevel]
+                e.select = e[bevel] == 0
 
             elif self.kind == 'NOT_CREASE':
-                e.select = not e[crease]
+                e.select = e[crease] == 0
 
             elif self.kind == 'NOT_ANY':
-                e.select = not e.seam and e.smooth and not e[bevel] and not e[crease]
+                e.select = not e.seam and e.smooth and e[bevel] == 0 and e[crease] == 0
 
         bmesh.update_edit_mesh(mesh)
         return {'FINISHED'}
