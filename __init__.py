@@ -1,22 +1,12 @@
 import bpy
 
-from . booleans . edit import EditBoolean
-from . booleans . mod import ModBoolean
+from . auto_smooth import AutoSmooth
+from . mod_boolean import ModBoolean
+from . edit_boolean import EditBoolean
 
-from . modifiers . bevel import Bevel
-from . modifiers . solidify import Solidify
-from . modifiers . apply import ApplyModifiers
-
-from . object . auto_smooth import AutoSmooth
-from . object . export_obj import ExportObj
-
-from . edges . get_angle import GetAngle
-from . edges . get_edge import GetEdge
-from . edges . set_edge import SetEdge
-
-from . bake import BakeSettings
-from . bake import Bake
-from . bake import BakePanel
+from . get_angle import GetAngle
+from . get_edge import GetEdge
+from . set_edge import SetEdge
 
 from . menus import *
 
@@ -26,75 +16,70 @@ bl_info = {
     "name": "Bedset",
     "description": "Some tools to make Blender more comfortable",
     "author": "bonjorno7",
-    "version": (0, 1, 6),
-    "location": "3D View > Sidebar",
+    "version": (0, 1, 7),
+    "location": "3D View",
     "category": "Mesh",
     "warning": "",
 }
 
 
 classes = (
-    BakeSettings, Bake, BakePanel,
-    ModBoolean, EditBoolean,
+    AutoSmooth, ModBoolean, EditBoolean,
     GetAngle, GetEdge, SetEdge,
-    Bevel, Solidify, ApplyModifiers,
-    AutoSmooth, ExportObj,
-    BooleansMenu,
-    ModifiersMenu,
-    SetOriginMenu,
-    ApplyTransformsMenu,
-    ObjectMenu,
-    SelectEdgesMenu,
-    SelectEdgesInvertedMenu,
-    MarkEdgesMenu,
-    ClearEdgesMenu,
-    EdgesMenu,
-    BedsetMenu,
+    ViewPie, ShadingPie,
+    ApplyPie, OriginPie,
+    BedsetPie, ModBooleanPie, 
+    EditBooleanPie, DeletePie,
+    EdgeSelectMenu, EdgeMarkMenu, FaceSelectMenu,
+    VertexPie, EdgePie, FacePie,
 )
 
 
 addon_keymaps = []
 
 
-def remove_doubles_in_delete_menu(self, context):
-    self.layout.separator()
-    self.layout.operator("mesh.remove_doubles")
-
-
 def register():
     for c in classes:
         bpy.utils.register_class(c)
 
-    bpy.types.Scene.BedsetBakeSettings = bpy.props.PointerProperty(type=BakeSettings)
-
-    bpy.types.VIEW3D_MT_edit_mesh_delete.append(remove_doubles_in_delete_menu)
-
     kc = bpy.context.window_manager.keyconfigs.addon
-    km = kc.keymaps.new(name="3D View", space_type='VIEW_3D')
+    kmo = kc.keymaps.new(name="Object Mode", space_type='EMPTY')
+    kmm = kc.keymaps.new(name="Mesh", space_type='EMPTY')
 
-    kmi = km.keymap_items.new("wm.call_menu_pie", "B", 'PRESS')
-    kmi.properties.name = BedsetMenu.bl_idname
-    addon_keymaps.append((km, kmi))
+    kmi = kmo.keymap_items.new("wm.call_menu_pie", 'B', 'PRESS')
+    kmi.properties.name = BedsetPie.bl_idname
+    addon_keymaps.append((kmo, kmi))
 
-#    I can't figure out how to overwrite Shift + E, so I'm not sure what I want to do right now
-#    kmi = km.keymap_items.new("wm.call_menu_pie", "FIVE", 'PRESS')
-#    kmi.properties.name = EdgesMenu.bl_idname
-#    addon_keymaps.append((km, kmi))
+    kmi = kmo.keymap_items.new("wm.call_menu_pie", 'B', 'PRESS', shift=True)
+    kmi.properties.name = ModBooleanPie.bl_idname
+    addon_keymaps.append((kmo, kmi))
+
+    kmi = kmm.keymap_items.new("wm.call_menu_pie", 'B', 'PRESS', shift=True)
+    kmi.properties.name = EditBooleanPie.bl_idname
+    addon_keymaps.append((kmm, kmi))
+
+    kmi = kmm.keymap_items.new("wm.call_menu_pie", 'X', 'PRESS', shift=True)
+    kmi.properties.name = DeletePie.bl_idname
+    addon_keymaps.append((kmm, kmi))
+
+    kmi = kmm.keymap_items.new("wm.call_menu_pie", 'V', 'PRESS', shift=True)
+    kmi.properties.name = VertexPie.bl_idname
+    addon_keymaps.append((kmm, kmi))
+
+    kmi = kmm.keymap_items.new("wm.call_menu_pie", 'E', 'PRESS', shift=True)
+    kmi.properties.name = EdgePie.bl_idname
+    addon_keymaps.append((kmm, kmi))
+
+    kmi = kmm.keymap_items.new("wm.call_menu_pie", 'F', 'PRESS', shift=True)
+    kmi.properties.name = FacePie.bl_idname
+    addon_keymaps.append((kmm, kmi))
 
 
 def unregister():
     for c in classes:
         bpy.utils.unregister_class(c)
 
-    del bpy.types.Scene.BedsetBakeSettings
-
-    bpy.types.VIEW3D_MT_edit_mesh_delete.remove(remove_doubles_in_delete_menu)
-
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
 
     addon_keymaps.clear()
-
-
-if __name__ == "__main__":
-    register()

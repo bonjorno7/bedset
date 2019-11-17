@@ -26,19 +26,11 @@ class AutoSmooth(bpy.types.Operator):
         subtype='ANGLE',
     )
 
-    clear: bpy.props.BoolProperty(
-        name="Clear Custom Split Normals Data",
-        description="Remove the custom split normals layer, if it exists",
-        default=False,
-    )
-
     @classmethod
     def poll(cls, context):
         return len(context.selected_objects) > 0
 
     def execute(self, context):
-        active = context.active_object
-
         for o in context.selected_objects:
             mesh = o.data
             mesh.use_auto_smooth = self.smooth
@@ -51,7 +43,7 @@ class AutoSmooth(bpy.types.Operator):
                 bm.from_mesh(mesh)
 
             for f in bm.faces:
-                f.smooth = self.smooth
+                f.smooth = True
 
             if mesh.is_editmode:
                 bmesh.update_edit_mesh(mesh)
@@ -59,14 +51,8 @@ class AutoSmooth(bpy.types.Operator):
                 bm.to_mesh(mesh)
                 mesh.update()
 
-            if self.clear and mesh.has_custom_normals:
-                bpy.context.view_layer.objects.active = o
-                bpy.ops.mesh.customdata_custom_splitnormals_clear()
-
-        bpy.context.view_layer.objects.active = active
         return {'FINISHED'}
 
     def draw(self, context):
         self.layout.prop(self, "smooth")
         self.layout.prop(self, "angle")
-        self.layout.prop(self, "clear")
