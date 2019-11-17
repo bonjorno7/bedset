@@ -12,6 +12,7 @@ class SetEdge(bpy.types.Operator):
         name="Kind",
         description="What to mark the selected edges as",
         items=(
+            ('MARK_SEAM_AND_SHARP', "Mark Seam and Sharp", "Mark selected edges as Seam and Sharp"),
             ('MARK_SEAM', "Mark Seam", "Mark selected edges as Seam"),
             ('MARK_SHARP', "Mark Sharp", "Mark selected edges as Sharp"),
             ('MARK_BEVEL', "Mark Bevel", "Mark selected edges as Bevel"),
@@ -40,6 +41,11 @@ class SetEdge(bpy.types.Operator):
 
         selected = [e for e in bm.edges if e.select]
         selected = selected if selected else bm.edges
+
+        if self.kind == 'MARK_SEAM_AND_SHARP':
+            for e in selected:
+                e.seam = True
+                e.smooth = False
 
         if self.kind == 'MARK_SEAM':
             for e in selected:
