@@ -1,48 +1,29 @@
-### Bedset is a collection of tools to make Blender more comfortable
+### Bedset is a collection of tools and shortcuts to make Blender more comfortable to use
 
-#### Pie menus
-* Press B to open the Bedset pie, you can figure it out from there
-* You can also navigate the menus easily with only the keyboard
+#### Object mode shortcuts
+* Press `B` to open the Bedset pie menu
+* Press `Shift + B` to open the Boolean pie menu
 
-#### Edges
+#### Edit mode shortcuts
+* Press `Shift + B` to open the Boolean pie menu
+* Press `Shift + X` to open the Delete pie menu
+* Press `Shift + V` to open the Vertex pie menu
+* Press `Shift + E` to open the Edge pie menu
+* Press `Shift + F` to open the Face pie menu
 
-* Select: select edges that meet the set criteria (seam, sharp, bevel, crease, angle)
-* Select Inverted: select edges that meet the opposite criteria (not seam, not sharp, not bevel, not crease, not any)
-* Mark: mark edges as seam, sharp, bevel, crease
-* Clear: clear edges of seam, sharp, bevel, crease, all
+#### Object mode features
+* Apply pie menu: location, rotation, scale, rotation & scale, all transforms, visual geometry to mesh
+* Set origin pie menu: origin to 3d cursor, geometry to origin, origin to geometry
+* Shading pie menu: auto smooth 30 / 60 / 90 degrees, shade smooth / flat, clear custom normals
+* View pie menu: toggle overlays, toggle wireframes, toggle orthographic, toggle camera view
+* Boolean pie menu: difference, union, intersect, slice, inset
 
-I might add a menu for faces too, if I get some ideas of what to put there.
-
-#### Booleans in object mode
-
-* Difference
-* Union
-* Intersect
-* Inset: makes an inset inside the cutter
-* Extract: extracts the part of the target inside the cutter to a separate object
-
-#### Booleans in edit mode
-
-* Difference
-* Union
-* Intersect
-* Cut: uses the cutter like a knife
-
-#### Modifiers
-
-* Apply: duplicate selected objects, apply all modifiers
-* Bevel
-* Solidify
-
-Upcoming are Mirror, Array, Circular Array and maybe more.
-
-#### Object
-
-* Auto Smooth: smooth the selected objects and enable auto smooth with the specified angle
-* Export OBJs: export each selected object to a .obj (you have to save the project first)
-* Set Origin
-* Apply Transforms
-
-#### Baking
-
-I added PBR baking a while ago but didn't end up using it. You can find the panel in the Bedset tab, in the list of tabs that appears when you press N in the 3D view.
+#### Edit mode features
+* Boolean pie menu: difference, union, intersect, slice, cut
+* Delete pie menu: delete or dissolve vertices / edges / faces
+* Vertex pie menu: merge at center / at last / by distance, connect, and knife
+* Edge pie menu: bevel, bridge loops, merge loops, select menu, mark menu
+* Select edges based on angle, seam, sharp, bevel, crease, and more
+* Mark or clear edges as seam, sharp, bevel, and crease
+* Face pie menu: triangulate, poke, inset, flip normals, recalculate normals, select menu
+* Select faces by tris, quads, or ngons
