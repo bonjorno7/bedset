@@ -32,6 +32,9 @@ class AutoSmooth(bpy.types.Operator):
 
     def execute(self, context):
         for o in context.selected_objects:
+            if o.type != 'MESH':
+                continue
+
             mesh = o.data
             mesh.use_auto_smooth = self.smooth
             mesh.auto_smooth_angle = self.angle
