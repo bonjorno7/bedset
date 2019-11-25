@@ -87,7 +87,7 @@ class ModBooleanPie(bpy.types.Menu):
         pie.operator(ModBoolean.bl_idname, text="Union").kind = 'UNION'
         pie.operator(ModBoolean.bl_idname, text="Difference").kind = 'DIFFERENCE'
         pie.operator(ModBoolean.bl_idname, text="Intersect").kind = 'INTERSECT'
-        pie.operator(ModBoolean.bl_idname, text="Slash").kind = 'SLASH'
+        pie.operator(ModBoolean.bl_idname, text="Slice").kind = 'SLICE'
         pie.operator(ModBoolean.bl_idname, text="Inset").kind = 'INSET'
 
 
@@ -103,7 +103,7 @@ class EditBooleanPie(bpy.types.Menu):
         pie.operator(EditBoolean.bl_idname, text="Union").kind = 'UNION'
         pie.operator(EditBoolean.bl_idname, text="Difference").kind = 'DIFFERENCE'
         pie.operator(EditBoolean.bl_idname, text="Intersect").kind = 'INTERSECT'
-        pie.operator(EditBoolean.bl_idname, text="Slash").kind = 'SLASH'
+        pie.operator(EditBoolean.bl_idname, text="Slice").kind = 'SLICE'
         pie.operator(EditBoolean.bl_idname, text="Cut").kind = 'CUT'
 
 

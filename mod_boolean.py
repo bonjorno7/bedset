@@ -15,7 +15,7 @@ class ModBoolean(bpy.types.Operator):
             ('DIFFERENCE', "Difference", "Remove selected from active"),
             ('UNION', "Union", "Add selected to active"),
             ('INTERSECT', "Intersect", "Intersect selected with active"),
-            ('SLASH', "Slash", "Separate selected from active"),
+            ('SLICE', "Slice", "Separate selected from active"),
             ('INSET', "Inset", "Create an inset into active from selected"),
         ),
     )
@@ -40,7 +40,7 @@ class ModBoolean(bpy.types.Operator):
                 boolean.object = cutter
                 boolean.show_expanded = False
 
-        elif self.kind == 'SLASH':
+        elif self.kind == 'SLICE':
             for cutter in cutters:
                 cutter.display_type = 'WIRE'
                 cutter.hide_render = True

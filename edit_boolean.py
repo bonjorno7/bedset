@@ -15,7 +15,7 @@ class EditBoolean(bpy.types.Operator):
             ('DIFFERENCE', "Difference", "Remove selected from unselected"),
             ('UNION', "Union", "Add selected to unselected"),
             ('INTERSECT', "Intersect", "Intersect selected with unselected"),
-            ('SLASH', "Slash", "Separate selected from unselected"),
+            ('SLICE', "Slice", "Extract selected from unselected"),
             ('CUT', "Cut", "Use selected as knife on unselected"),
         ),
     )
@@ -72,7 +72,7 @@ class EditBoolean(bpy.types.Operator):
         if self.kind in ['DIFFERENCE', 'UNION', 'INTERSECT']:
             bpy.ops.mesh.intersect_boolean(operation=self.kind)
 
-        elif self.kind == 'SLASH':
+        elif self.kind == 'SLICE':
             mesh = context.active_object.data
             bm = bmesh.from_edit_mesh(mesh)
 
