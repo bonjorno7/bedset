@@ -28,45 +28,33 @@ class EditBoolean(bpy.types.Operator):
     def geometry(self, bm):
         return bm.verts[:] + bm.edges[:] + bm.faces[:]
 
-    def selected(self, bm):
-        verts = [v for v in bm.verts if v.select]
-        edges = [e for e in bm.edges if e.select]
-        faces = [f for f in bm.faces if f.select]
-        return verts + edges + faces
-
-    def unselected(self, bm):
-        verts = [v for v in bm.verts if not v.select]
-        edges = [e for e in bm.edges if not e.select]
-        faces = [f for f in bm.faces if not f.select]
-        return verts + edges + faces
+    def selected(self, geom):
+        return [g for g in geom if g.select]
 
     def select(self, geom):
         for g in geom:
             g.select = True
 
+    def unselected(self, geom):
+        return [g for g in geom if not g.select]
+
     def unselect(self, geom):
         for g in geom:
             g.select = False
 
-    def hidden(self, bm):
-        verts = [v for v in bm.verts if v.hide]
-        edges = [e for e in bm.edges if e.hide]
-        faces = [f for f in bm.faces if f.hide]
-        return verts + edges + faces
+    def visible(self, geom):
+        return [g for g in geom if not g.hide]
 
-    def unhidden(self, bm):
-        verts = [v for v in bm.verts if not v.hide]
-        edges = [e for e in bm.edges if not e.hide]
-        faces = [f for f in bm.faces if not f.hide]
-        return verts + edges + faces
+    def reveal(self, geom):
+        for g in geom:
+            g.hide = False
+
+    def hidden(self, geom):
+        return [g for g in geom if g.hide]
 
     def hide(self, geom):
         for g in geom:
             g.hide = True
-
-    def unhide(self, geom):
-        for g in geom:
-            g.hide = False
 
     def execute(self, context):
         if self.kind in ['DIFFERENCE', 'UNION', 'INTERSECT']:
@@ -76,8 +64,12 @@ class EditBoolean(bpy.types.Operator):
             mesh = context.active_object.data
             bm = bmesh.from_edit_mesh(mesh)
 
-            target_one = self.unselected(bm)
-            cutter_one = self.selected(bm)
+            geometry = self.geometry(bm)
+            visible = self.visible(geometry)
+            hidden = self.hidden(geometry)
+
+            target_one = self.unselected(visible)
+            cutter_one = self.selected(visible)
 
             target_two = bmesh.ops.duplicate(bm, geom=target_one)["geom"]
             cutter_two = bmesh.ops.duplicate(bm, geom=cutter_one)["geom"]
@@ -85,27 +77,49 @@ class EditBoolean(bpy.types.Operator):
             self.hide(target_two + cutter_two)
             bpy.ops.mesh.intersect_boolean(operation='DIFFERENCE')
 
-            self.hide(self.geometry(bm))
-            self.unhide(target_two + cutter_two)
+            geometry = self.geometry(bm)
+            self.hide(geometry)
+
+            self.reveal(target_two + cutter_two)
             self.select(cutter_two)
             bpy.ops.mesh.intersect_boolean(operation='INTERSECT')
 
-            self.select(self.unhidden(bm))
-            self.unhide(self.geometry(bm))
+            geometry = self.geometry(bm)
+            visible = self.visible(geometry)
+
+            self.select(visible)
+            self.reveal(geometry)
+            self.hide(hidden)
+
+            bm.normal_update()
             bmesh.update_edit_mesh(mesh)
 
         elif self.kind == 'CUT':
             mesh = context.active_object.data
             bm = bmesh.from_edit_mesh(mesh)
-            cutter = self.selected(bm)
+
+            bpy.ops.mesh.split()
+
+            geometry = self.geometry(bm)
+            cutter = self.selected(geometry)
 
             bpy.ops.mesh.intersect()
-            new = self.selected(bm)
-            self.unselect(new)
+
+            geometry = self.geometry(bm)
+            new = self.selected(geometry)
+
+            self.unselect(geometry)
             self.select(cutter)
 
-            bmesh.ops.delete(bm, geom=self.selected(bm), context='VERTS')
-            self.select([g for g in new if g in self.geometry(bm)])
+            bpy.ops.mesh.select_linked()
+
+            cutter = self.selected(geometry)
+            bmesh.ops.delete(bm, geom=cutter, context='VERTS')
+
+            geometry = self.geometry(bm)
+            self.select([g for g in new if g in geometry])
+
+            bm.normal_update()
             bmesh.update_edit_mesh(mesh)
 
         return {'FINISHED'}
